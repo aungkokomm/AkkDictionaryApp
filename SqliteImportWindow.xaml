@@ -1,0 +1,37 @@
+<Window x:Class="AkkDictionaryApp.SqliteImportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Import from SQLite" Height="350" Width="500" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button Content="OK" Width="80" Click="OKButton_Click" Margin="0,0,8,0"/>
+            <Button Content="Cancel" Width="80" Click="CancelButton_Click"/>
+        </StackPanel>
+
+        <ScrollViewer DockPanel.Dock="Top">
+            <StackPanel Margin="10">
+                <TextBlock Text="Import from SQLite Database" FontSize="16" FontWeight="Bold" Margin="0,0,0,20"/>
+
+                <TextBlock Text="Source Database File:" FontWeight="Bold" Margin="0,0,0,4"/>
+                <DockPanel Margin="0,0,0,12">
+                    <Button DockPanel.Dock="Right" Content="Browse..." Width="70" Click="BrowseButton_Click" Margin="8,0,0,0"/>
+                    <TextBox x:Name="SourcePathTextBox" Padding="4"/>
+                </DockPanel>
+
+                <TextBlock Text="Table Name (required):" FontWeight="Bold" Margin="0,0,0,4"/>
+                <TextBox x:Name="TableNameTextBox" Margin="0,0,0,12" Padding="4" ToolTip="Name of the table to import from"/>
+
+                <TextBlock Text="Headword Column (required):" FontWeight="Bold" Margin="0,0,0,4"/>
+                <TextBox x:Name="HeadColTextBox" Margin="0,0,0,12" Padding="4" ToolTip="Column name containing headwords"/>
+
+                <TextBlock Text="Definition Column (required):" FontWeight="Bold" Margin="0,0,0,4"/>
+                <TextBox x:Name="DefColTextBox" Margin="0,0,0,12" Padding="4" ToolTip="Column name containing definitions"/>
+
+                <TextBlock Text="POS Column (optional):" FontWeight="Bold" Margin="0,0,0,4"/>
+                <TextBox x:Name="PosColTextBox" Margin="0,0,0,12" Padding="4" ToolTip="Column name for part-of-speech (leave empty if not available)"/>
+
+                <TextBlock Text="Leave POS Column empty if your database doesn't have one." Foreground="Gray" FontSize="11" Margin="0,0,0,0"/>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</Window>

@@ -1,0 +1,1 @@
+AKK En-to-MM Dictionary v2f: Settings + Import from SQLite + Rebuild from Excel. Open AkkDictionaryApp.csproj in VS2022 and press F5.

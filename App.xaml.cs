@@ -1,0 +1,1 @@
+using System.Windows; namespace AkkDictionaryApp { public partial class App : Application { } }

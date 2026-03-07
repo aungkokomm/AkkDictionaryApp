@@ -1,0 +1,66 @@
+<Window x:Class="AkkDictionaryApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AKK En-to-MM Dictionary" Height="760" Width="1120" FontFamily="Myanmar Text">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="Rebuild database from Excel..." Click="RebuildFromExcel_Click"/>
+                <MenuItem Header="Import from SQLite..." Click="ImportFromSqlite_Click"/>
+                <Separator/>
+                <MenuItem Header="E_xit" Click="Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="_View">
+                <MenuItem Header="Search in definitions (Myanmar→English)" IsCheckable="True" x:Name="ReverseSearchMenu" Checked="ReverseSearchMenu_Checked" Unchecked="ReverseSearchMenu_Unchecked"/>
+            </MenuItem>
+            <MenuItem Header="_Settings" Click="OpenSettings_Click"/>
+            <MenuItem Header="_Help">
+                <MenuItem Header="About" Click="About_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="SearchBox" Width="560" Height="34" Margin="0,0,8,0"
+                         VerticalContentAlignment="Center"
+                         TextChanged="SearchBox_TextChanged" KeyDown="SearchBox_KeyDown"
+                         ToolTip="Type a word (prefix or substring)"/>
+                <ListBox x:Name="SuggestList" Grid.Row="1" Width="560" MaxHeight="200" Visibility="Collapsed"
+                         MouseDoubleClick="SuggestList_MouseDoubleClick"/>
+            </Grid>
+            <CheckBox x:Name="ReverseSearchToggle" Content="Search in definitions (MM→EN)" Margin="8,0" VerticalAlignment="Center" Checked="ReverseSearchToggle_CheckedChanged" Unchecked="ReverseSearchToggle_CheckedChanged"/>
+            <Button Content="Clear" Width="80" Click="Clear_Click" Margin="8,0,0,0"/>
+        </StackPanel>
+
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <ListView x:Name="ResultsList" Grid.Column="0" SelectionChanged="ResultsList_SelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Headword" Width="300" DisplayMemberBinding="{Binding DisplayHeadword}"/>
+                        <GridViewColumn Header="POS" Width="160" DisplayMemberBinding="{Binding Pos}"/>
+                        <GridViewColumn Header="#" Width="60" DisplayMemberBinding="{Binding Senses}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <ScrollViewer Grid.Column="1" Margin="12,0,0,0">
+                <StackPanel>
+                    <TextBlock Text="{Binding SelectedItem.DisplayHeadword, ElementName=ResultsList}"
+                               FontSize="24" FontWeight="Bold" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding SelectedItem.Pos, ElementName=ResultsList}"
+                               Margin="0,4,0,8" Foreground="Gray"/>
+                    <ItemsControl x:Name="SensesPanel"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </DockPanel>
+</Window>

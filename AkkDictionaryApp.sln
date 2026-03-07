@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11520.95 d18.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkkDictionaryApp", "AkkDictionaryApp.csproj", "{B55CE1F7-632B-A052-BC73-6D3FC95FC2D7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B55CE1F7-632B-A052-BC73-6D3FC95FC2D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B55CE1F7-632B-A052-BC73-6D3FC95FC2D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B55CE1F7-632B-A052-BC73-6D3FC95FC2D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B55CE1F7-632B-A052-BC73-6D3FC95FC2D7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {893ADE9D-6E34-4DB7-83EE-7956ED6E25C2}
+	EndGlobalSection
+EndGlobal
