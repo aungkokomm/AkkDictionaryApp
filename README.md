@@ -32,9 +32,10 @@ A fast, modern English ↔ Myanmar dictionary application built with .NET 8 and 
 ### For Users
 
 **Download and Run (Easiest)**
-1. Download: [`AKK En-to-MM Dictionary.exe`](https://github.com/aungkokomm/AkkDictionaryApp/releases)
-2. Double-click to run
-3. Start searching!
+1. Clone Roposistory 
+2. Double-click Build.bat 
+3. in bin\Release\net8.0-windows there will be AkkDictionary.exe
+3. Run it and searching!
 
 **System Requirements:**
 - Windows 10 or later (64-bit)
