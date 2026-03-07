@@ -33,8 +33,8 @@ A fast, modern English ↔ Myanmar dictionary application built with .NET 8 and 
 
 **Download and Run (Easiest)**
 1. Clone Roposistory 
-2. Double-click Build.bat 
-3. in bin\Release\net8.0-windows there will be AkkDictionary.exe
+2. Double-click Build.bat wait till it finishes.
+3. After built complete, in bin\Release\net8.0-windows there will be AkkDictionary.exe
 3. Run it and searching!
 
 **System Requirements:**
