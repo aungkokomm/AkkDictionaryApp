@@ -7,7 +7,7 @@
 #define MyAppPublisher "AKK Dictionary Team"
 #define MyAppExeName "AkkDictionary.exe"
 #define MyAppUrl "https://github.com/aungkokomm/English-Myanmar-Dictionary-"
-#define SourcePath "bin\Release\net8.0-windows"
+#define SourcePath "bin\Release\net8.0-windows\win-x64\publish"
 
 [Setup]
 AppId={{8F2E3E8C-9E7D-4F3D-8C5B-2E1A4F7C3B9D}

@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>Assets/akk.ico</ApplicationIcon>
-    <AssemblyName>AKK En-to-MM Dictionary</AssemblyName>
+    <AssemblyName>AkkDictionary</AssemblyName>
     <RootNamespace>AkkDictionaryApp</RootNamespace>
     <Version>1.0.0.0</Version>
     <Authors>AKK Dictionary Team</Authors>
