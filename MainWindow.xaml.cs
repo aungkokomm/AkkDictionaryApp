@@ -194,9 +194,10 @@ LIMIT 400;";
         }
 
         private void About_Click(object sender, RoutedEventArgs e)
-        { MessageBox.Show(@"AKK En-to-MM Dictionary
-
-Built with .NET 8 + WPF + SQLite.", "About"); }
+        {
+            var aboutWin = new AboutWindow { Owner = this };
+            aboutWin.ShowDialog();
+        }
 
         private void Exit_Click(object sender, RoutedEventArgs e) => Close();
 
