@@ -11,6 +11,7 @@ A fast, modern English ↔ Myanmar dictionary application built with .NET 8 and 
 ![Status](https://img.shields.io/badge/Status-Production%20Ready-green)
 
 ---
+<img width="1662" height="804" alt="image" src="https://github.com/user-attachments/assets/0ccb68e3-510f-4ae3-a775-ab24c523545b" />
 
 ## ✨ Features
 
