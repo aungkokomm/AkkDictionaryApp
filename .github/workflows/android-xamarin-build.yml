@@ -9,61 +9,45 @@ on:
 jobs:
   build-android:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-      
+
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
-      
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.x'
 
       - name: Install Android Workload
-        run: dotnet workload install android --skip-manifest-update
-
-      - name: Verify Android Workload
-        run: dotnet workload list
-
-      - name: Diagnostic Information
-        run: |
-          echo "=== Java Version ===" 
-          java -version
-          echo "=== .NET Version ==="
-          dotnet --version
-          echo "=== .NET Workloads ==="
-          dotnet workload list
-          echo "=== Android SDK Info ==="
-          ls -la $ANDROID_HOME/platforms/ 2>/dev/null || echo "ANDROID_HOME not set or empty"
+        run: dotnet workload install android
 
       - name: Restore NuGet packages
         working-directory: ./AkkDictionary.Android
-        run: dotnet restore AkkDictionary.Android.csproj -v diagnostic
+        run: dotnet restore
 
       - name: Build APK (Release)
         working-directory: ./AkkDictionary.Android
-        run: dotnet publish -f net9.0-android -c Release -p:AndroidPackageFormat=apk -p:AndroidKeyStore=false --no-restore -v diagnostic 2>&1 | tee build.log
-      
-      - name: List Generated APK
-        run: find . -name "*.apk" -type f -exec ls -lh {} \;
-      
+        run: dotnet publish -f net9.0-android -c Release -p:AndroidPackageFormat=apk -p:AndroidKeyStore=false
+
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: android-apk-xamarin
+          name: android-apk
           path: AkkDictionary.Android/bin/Release/net9.0-android/publish/*.apk
           if-no-files-found: error
-      
+
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v1
         with:
           files: AkkDictionary.Android/bin/Release/net9.0-android/publish/*.apk
+
