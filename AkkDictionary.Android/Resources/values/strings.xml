@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AKK Dictionary</string>
+    <string name="search_hint">English or Myanmar...</string>
+    <string name="search_button">Search</string>
+</resources>

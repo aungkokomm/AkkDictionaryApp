@@ -1,0 +1,55 @@
+name: Android APK Build (Xamarin.Android - Direct SDK)
+
+on:
+  push:
+    branches: [ master ]
+    tags: [ 'v*' ]
+  workflow_dispatch:
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.x'
+      
+      - name: Install Android Workload
+        run: dotnet workload install android
+      
+      - name: Restore NuGet packages
+        working-directory: ./AkkDictionary.Android
+        run: dotnet restore
+      
+      - name: Build APK (Release)
+        working-directory: ./AkkDictionary.Android
+        run: dotnet publish -f net9.0-android -c Release -p:AndroidPackageFormat=apk -p:AndroidKeyStore=false --no-restore
+      
+      - name: List Generated APK
+        run: find . -name "*.apk" -type f -exec ls -lh {} \;
+      
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apk-xamarin
+          path: AkkDictionary.Android/bin/Release/net9.0-android/publish/*.apk
+          if-no-files-found: error
+      
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: AkkDictionary.Android/bin/Release/net9.0-android/publish/*.apk
