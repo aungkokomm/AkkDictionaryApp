@@ -32,33 +32,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-      
+
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
-      
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
-      
+          dotnet-version: '10.0.x'
+
       - name: Install MAUI Workload
         run: dotnet workload install maui-android
-      
-      - name: Build Android
+
+      - name: Build Android APK
+        working-directory: ./AkkDictionary.MAUI
         run: |
-          dotnet publish -f net8.0-android -c Release -o ./bin/android
-      
-      - name: Upload Android Artifacts
+          dotnet publish -f net10.0-android -c Release -p:AndroidPackageFormat=apk
+
+      - name: Upload Android APK
         uses: actions/upload-artifact@v4
         with:
-          name: android-build
-          path: ./bin/android/
+          name: android-apk
+          path: AkkDictionary.MAUI/bin/Release/net10.0-android/publish/*.apk
 
   build-macos:
     runs-on: macos-latest
@@ -92,21 +93,19 @@ jobs:
           path: ./bin/releases/
 
   create-release:
-    needs: [build-windows, build-android, build-macos]
+    needs: [build-android]
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Download all artifacts
         uses: actions/download-artifact@v4
-      
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            windows-build/**/*
-            android-build/**/*.apk
-            macos-build/**/*.dmg
+            android-apk/**/*.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
