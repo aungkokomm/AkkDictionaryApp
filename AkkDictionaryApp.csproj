@@ -21,13 +21,12 @@
     <PackageReference Include="ExcelDataReader.DataSet" Version="3.7.0" />
   </ItemGroup>
   <ItemGroup>
-    <None Include=".github\workflows\cross-platform-build.yml" />
-    <None Include="AkkDictionary.MAUI\AkkDictionary.MAUI.csproj" />
     <None Include="dictionary.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <!-- Exclude Android project files from Windows build -->
   <ItemGroup>
-    <Folder Include="AkkDictionary.MAUI\Services\" />
+    <Compile Remove="AkkDictionary.Android\**\*.cs" />
   </ItemGroup>
 </Project>
