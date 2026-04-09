@@ -1,12 +1,11 @@
 using Android.App;
 using Android.OS;
 using Android.Widget;
-using AndroidX.AppCompat.App;
 
 namespace AkkDictionary.Android;
 
-[Activity(Label = "@string/app_name", MainLauncher = true, Theme = "@android:style/Theme.Material.Light")]
-public class MainActivity : AppCompatActivity
+[Activity(Label = "@string/app_name", MainLauncher = true)]
+public class MainActivity : Activity
 {
     protected override void OnCreate(Bundle? savedInstanceState)
     {
