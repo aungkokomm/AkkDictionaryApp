@@ -1,0 +1,53 @@
+# Android Build Container for .NET MAUI
+FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy
+
+# Install Android SDK, NDK, and dependencies
+RUN apt-get update && apt-get install -y \
+    openjdk-17-jdk \
+    wget \
+    unzip \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set Java environment
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+ENV PATH=$JAVA_HOME/bin:$PATH
+
+# Install Android SDK
+ENV ANDROID_SDK_ROOT=/android-sdk
+RUN mkdir -p $ANDROID_SDK_ROOT && \
+    wget -q https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip -O /tmp/cmdline-tools.zip && \
+    unzip -q /tmp/cmdline-tools.zip -d $ANDROID_SDK_ROOT && \
+    mv $ANDROID_SDK_ROOT/cmdline-tools $ANDROID_SDK_ROOT/latest && \
+    mkdir -p $ANDROID_SDK_ROOT/cmdline-tools && \
+    mv $ANDROID_SDK_ROOT/latest $ANDROID_SDK_ROOT/cmdline-tools/ && \
+    rm /tmp/cmdline-tools.zip
+
+ENV PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH
+
+# Install SDK components
+RUN yes | sdkmanager --licenses && \
+    sdkmanager "platforms;android-34" \
+    "build-tools;34.0.0" \
+    "ndk;27.0.11718014" \
+    "cmake;3.27.1"
+
+# Set MAUI/Android environment variables
+ENV ANDROID_SDK_PATH=$ANDROID_SDK_ROOT
+ENV ANDROID_NDK_PATH=$ANDROID_SDK_ROOT/ndk/27.0.11718014
+ENV PATH=$ANDROID_NDK_PATH:$PATH
+
+# Install MAUI workload
+RUN dotnet workload install maui-android
+
+# Create app directory
+WORKDIR /app
+
+# Copy source
+COPY . .
+
+# Build Android
+RUN dotnet publish -f net8.0-android -c Release -o ./bin/android
+
+# Output
+RUN ls -lah ./bin/android/

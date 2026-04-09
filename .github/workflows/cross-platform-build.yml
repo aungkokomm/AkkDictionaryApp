@@ -1,0 +1,112 @@
+name: Cross-Platform Builds
+
+on:
+  push:
+    branches: [ master ]
+    tags: [ 'v*' ]
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      
+      - name: Build Windows
+        run: |
+          dotnet build -c Release -f net8.0-windows
+          dotnet publish -c Release -f net8.0-windows -o ./bin/windows
+      
+      - name: Upload Windows Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-build
+          path: ./bin/windows/
+
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      
+      - name: Install MAUI Workload
+        run: dotnet workload install maui-android
+      
+      - name: Build Android
+        run: |
+          dotnet publish -f net8.0-android -c Release -o ./bin/android
+      
+      - name: Upload Android Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-build
+          path: ./bin/android/
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      
+      - name: Install MAUI Workload
+        run: dotnet workload install maui-maccatalyst
+      
+      - name: Build macOS
+        run: |
+          dotnet publish -f net8.0-maccatalyst -c Release -o ./bin/macos
+      
+      - name: Create DMG
+        run: |
+          mkdir -p ./bin/releases
+          hdiutil create -volname "AKK Dictionary" \
+            -srcfolder ./bin/macos \
+            -ov -format UDZO \
+            ./bin/releases/AKK-Dictionary-macOS-v1.1.0.dmg
+      
+      - name: Upload macOS Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-build
+          path: ./bin/releases/
+
+  create-release:
+    needs: [build-windows, build-android, build-macos]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            windows-build/**/*
+            android-build/**/*.apk
+            macos-build/**/*.dmg
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
