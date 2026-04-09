@@ -1,7 +1,12 @@
+using Android.App;
+using Android.OS;
+using Android.Widget;
+using AndroidX.AppCompat.App;
+
 namespace AkkDictionary.Android;
 
-[Activity(Label = "@string/app_name", MainLauncher = true)]
-public class MainActivity : Activity
+[Activity(Label = "@string/app_name", MainLauncher = true, Theme = "@android:style/Theme.Material.Light")]
+public class MainActivity : AppCompatActivity
 {
     protected override void OnCreate(Bundle? savedInstanceState)
     {
@@ -13,11 +18,14 @@ public class MainActivity : Activity
         var searchButton = FindViewById<Button>(Resource.Id.searchButton);
         var resultsView = FindViewById<ListView>(Resource.Id.resultsView);
 
-        // Wire up search button click
-        searchButton.Click += (s, e) => {
-            string query = searchInput.Text ?? "";
-            // TODO: Implement search logic with database
-            Toast.MakeText(this, "Search for: " + query, ToastLength.Short)?.Show();
-        };
+        if (searchButton != null)
+        {
+            // Wire up search button click
+            searchButton.Click += (s, e) =>
+            {
+                string query = searchInput?.Text ?? "";
+                Toast.MakeText(this, "Search for: " + query, ToastLength.Short)?.Show();
+            };
+        }
     }
 }

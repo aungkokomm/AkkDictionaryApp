@@ -26,5 +26,7 @@
   <!-- NuGet Dependencies -->
   <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+    <PackageReference Include="AndroidX.AppCompat" Version="1.7.0" />
+    <PackageReference Include="AndroidX.ConstraintLayout" Version="2.1.4" />
   </ItemGroup>
 </Project>
