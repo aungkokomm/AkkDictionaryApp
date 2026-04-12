@@ -5,7 +5,7 @@
 [![Framework: .NET 8](https://img.shields.io/badge/Framework-.NET%208-purple)](https://dotnet.microsoft.com/)
 [![Build: Passing](https://img.shields.io/badge/Build-Passing-brightgreen)](https://github.com/aungkokomm/AkkDictionaryApp)
 
-A fast, modern English ↔ Myanmar dictionary application built with .NET 8 and WPF. Search in both directions, import custom dictionaries, and customize your experience.
+A fast, modern, simple English ↔ Myanmar dictionary application built with .NET 8 and WPF. Search in both directions(partially), import custom dictionaries, and customize your experience.
 
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)
 ![Status](https://img.shields.io/badge/Status-Production%20Ready-green)
