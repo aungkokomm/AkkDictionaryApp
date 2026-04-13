@@ -33,10 +33,9 @@ A fast, modern, simple English ↔ Myanmar dictionary application built with .NE
 ### For Users
 
 **Download and Run (Easiest)**
-1. Clone Roposistory 
-2. Double-click Build.bat wait till it finishes.
-3. After built complete, in bin\Release\net8.0-windows there will be AkkDictionary.exe
-3. Run it and searching!
+1. Download latest release setup file. 
+2. Install.
+3. Run it, and enjoy!
 
 **System Requirements:**
 - Windows 10 or later (64-bit)
