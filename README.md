@@ -1,388 +1,131 @@
-# 📚 AKK En-to-MM Dictionary
+# AKK English–Myanmar Dictionary
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Platform: Windows](https://img.shields.io/badge/Platform-Windows%2010%2B-blue)](https://www.microsoft.com/windows/)
-[![Framework: .NET 8](https://img.shields.io/badge/Framework-.NET%208-purple)](https://dotnet.microsoft.com/)
-[![Build: Passing](https://img.shields.io/badge/Build-Passing-brightgreen)](https://github.com/aungkokomm/AkkDictionaryApp)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
+[![Platform](https://img.shields.io/badge/Platform-Windows%2010%2B-blue)](https://github.com/aungkokomm/English-Myanmar-Dictionary-/releases)
+[![Android](https://img.shields.io/badge/Platform-Android%208%2B-brightgreen)](https://github.com/aungkokomm/English-Myanmar-Dictionary-/releases)
+[![Framework](https://img.shields.io/badge/.NET-8-purple)](https://dotnet.microsoft.com/)
 
-A fast, modern, simple English ↔ Myanmar dictionary application built with .NET 8 and WPF. Search in both directions(partially), import custom dictionaries, and customize your experience.
-
-![Version](https://img.shields.io/badge/Version-1.0.0-blue)
-![Status](https://img.shields.io/badge/Status-Production%20Ready-green)
+A fast, offline English ↔ Myanmar dictionary for Windows and Android. No internet connection required — the full database is bundled with the app.
 
 ---
-<img width="1370" height="869" alt="image" src="https://github.com/user-attachments/assets/bfed872f-9448-49ba-a95e-0ba0f3fbae36" />
 
+## Screenshots
 
+<img width="1370" alt="Windows app screenshot" src="https://github.com/user-attachments/assets/bfed872f-9448-49ba-a95e-0ba0f3fbae36" />
 
-<img width="831" height="1801" alt="image" src="https://github.com/user-attachments/assets/6d7627bc-d39c-4828-b614-6f2d9c0058d4" />
+<img width="400" alt="Android app screenshot" src="https://github.com/user-attachments/assets/6d7627bc-d39c-4828-b614-6f2d9c0058d4" />
 
-## 📱 Available Platforms
+---
 
-### Windows Desktop (v1.1.0)
-* **Smart Fuzzy Search:** The search engine computes edit distances to suggest the closest matches if your query returns zero results.
-* **Instant Dark Mode:** Toggle between Light and Dark themes with zero flickering.
-* **Native Text-to-Speech:** Listen to accurate pronunciations instantly using the built-in Windows speech engine (no internet required).
-* **Customizable Layout:** Adjust the resizable split pane; your preferred window dimensions and pane width are remembered between sessions.
-* **Interactive Definitions:** Click on "See also" cross-references to jump directly to related vocabulary.
-* **Bookmarks & Export:** Star entries to save them, or copy the headword, part-of-speech, and all numbered definitions to your clipboard with a single click.
-* **Optimized Search:** Typing rapidly only queries the database once after a 300ms pause.
+## Download
+
+Go to the [**Releases**](https://github.com/aungkokomm/English-Myanmar-Dictionary-/releases) page.
+
+| Platform | File | Requirements |
+|----------|------|--------------|
+| Windows  | `AkkDictionary-x.x.x-Setup.exe` | Windows 10/11 64-bit |
+| Android  | `com.aungkokomm.akkenglishmyanmar.apk` | Android 8.0+ |
+
+---
+
+## Features
+
+### Windows Desktop
+| Feature | Details |
+|---------|---------|
+| 🔍 Search | English→Myanmar and Myanmar→English (reverse) |
+| 💡 Auto-suggestions | Prefix suggestions as you type; recent history on focus |
+| 🔤 Fuzzy search | "Did you mean" suggestions when no exact match is found (Levenshtein) |
+| 🌙 Dark mode | Instant light/dark theme switch; persisted across sessions |
+| ↔ Resizable panes | Drag the splitter to resize list vs. detail; width remembered |
+| 🔖 Bookmarks | Star entries; view all bookmarks with one click |
+| 🔊 Text-to-speech | Read the headword aloud via Windows built-in speech engine |
+| ⎘ Copy | Copy headword + POS + all definitions to clipboard |
+| 📥 Import | Import dictionaries from Excel (.xlsx) or SQLite (.db) |
+| ⚙️ Settings | Font family, font scale, window size persistence |
 
 ### Android
-* **On-the-Go Translation:** Access the complete offline database from your mobile device.
-* **Optimized Performance:** Shares the same fast search debounce logic as the desktop app for a smooth typing experience.
-* **Touch-Friendly Interface:** Clean layout designed specifically for mobile screens.
-
-## ✨ Features
-
-- 🔍 **Fast English→Myanmar Search** - Instantly find word definitions
-- 🔄 **Reverse Search** - Search definitions to find Myanmar words (Myanmar→English)
-- 💡 **Auto-Suggestions** - Get suggestions as you type
-- 📊 **Excel Import** - Import dictionaries from Excel files
-- 💾 **SQLite Import** - Import from SQLite databases
-- ⚙️ **Customizable UI** - Change fonts and sizes to your preference
-- 💾 **Persistent Settings** - Your preferences are saved automatically
-- 🔗 **Clickable Links** - Click words in definitions to search them
-- 🌐 **Offline Ready** - No internet connection required
-- 🎨 **Modern Interface** - Clean, professional WPF design
+| Feature | Details |
+|---------|---------|
+| 🔍 Search | Full English→Myanmar search with debounce |
+| 🃏 Result cards | POS colour badge + first-line definition preview |
+| 📄 Detail screen | Full definition list per entry |
+| 📴 Offline | Works with no internet connection |
 
 ---
 
-## 🚀 Quick Start
+## Building from Source
 
-### For Users
+**Prerequisites:** .NET 8 SDK, Visual Studio 2022 (or `dotnet` CLI)
 
-**Download and Run (Easiest)**
-1. Download latest release setup file. 
-2. Install.
-3. Run it, and enjoy!
-
-**System Requirements:**
-- Windows 10 or later (64-bit)
-- 256 MB RAM minimum
-- 200+ MB disk space
-- No additional software needed
-
-### For Developers
-
-**Clone & Build**
 ```bash
-git clone https://github.com/aungkokomm/AkkDictionaryApp.git
-cd AkkDictionaryApp
-dotnet build -c Release
+git clone https://github.com/aungkokomm/English-Myanmar-Dictionary-.git
+cd English-Myanmar-Dictionary-
+
+# Run (debug)
+dotnet run --project AkkDictionaryApp.csproj
+
+# Release build
+dotnet build AkkDictionaryApp.csproj -c Release
+
+# Self-contained single-file EXE
+dotnet publish AkkDictionaryApp.csproj -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -o publish/win-x64
 ```
 
-**Run in Visual Studio 2022**
-1. Open `AkkDictionaryApp.sln`
-2. Press `F5` to run
-3. Start developing!
-
-**Build Distribution Executable**
-```powershell
-.\Build-Package.ps1
-```
-
----
-
-## 📖 Documentation
-
-Comprehensive guides for different users:
-
-| Document | Purpose | Audience |
-|----------|---------|----------|
-| [START_HERE.md](START_HERE.md) | Overview & navigation | Everyone |
-| [QUICK_START.md](QUICK_START.md) | How to use the app | End users |
-| [BUILD_AND_DISTRIBUTION.md](BUILD_AND_DISTRIBUTION.md) | Build & customize | Developers |
-| [FILE_GUIDE.md](FILE_GUIDE.md) | File navigation | All |
-| [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) | Code organization | Developers |
-
----
-
-## 🎯 Use Cases
-
-### 1. **Dictionary Lookup**
-Search for English words to find their Myanmar translations, or search Myanmar definitions to find English words.
-
-### 2. **Language Learning**
-Use auto-suggestions and clickable links to explore related words and expand vocabulary.
-
-### 3. **Translation Work**
-Import custom dictionaries from Excel or SQLite to support your translation projects.
-
-### 4. **Dictionary Management**
-Manage multiple dictionaries and customize the interface for your workflow.
-
----
-
-## 🛠️ Technology Stack
-
-- **Framework**: .NET 8
-- **UI**: Windows Presentation Foundation (WPF)
-- **Database**: SQLite3
-- **Build**: MSBuild / dotnet CLI
-- **Distribution**: Self-contained executable
-
----
-
-## 📦 Installation Methods
-
-### Method 1: Portable Executable (Recommended)
-- Download `.exe` file
-- No installation required
-- Works on any Windows 10+ system
-- Can run from USB drive
-
-### Method 2: Windows Installer
-Requires: [Inno Setup 6](https://jrsoftware.org/isinfo.php)
-```powershell
-.\Build-Package.ps1
-```
-Creates a professional installer with uninstaller support.
-
-### Method 3: Build from Source
+**Build the installer** (requires [Inno Setup 6](https://jrsoftware.org/isinfo.php)):
 ```bash
-git clone https://github.com/aungkokomm/AkkDictionaryApp.git
-dotnet publish -c Release -r win-x64 --self-contained
+# After publishing above
+"C:\Program Files (x86)\Inno Setup 6\iscc.exe" installer/AkkDictionary.iss
+```
+Output: `installer/output/AkkDictionary-x.x.x-Setup.exe`
+
+---
+
+## Importing a Custom Dictionary
+
+**From Excel**
+1. Prepare a `.xlsx` file with columns: `Word`, `state` (part of speech), `def` (definition)
+2. Menu → File → **Rebuild database from Excel…**
+
+**From SQLite**
+1. Menu → File → **Import from SQLite…**
+2. Select your `.db` file and map the column names
+
+---
+
+## Project Structure
+
+```
+├── MainWindow.xaml(.cs)          # Main window — search, list, detail pane
+├── SettingsWindow.xaml(.cs)      # Settings dialog
+├── SqliteImportWindow.xaml(.cs)  # SQLite import dialog
+├── AboutWindow.xaml(.cs)         # About dialog
+├── Utils.cs                      # DB helpers, search, fuzzy, settings
+├── App.xaml(.cs)                 # Application entry; loads theme
+├── Themes/
+│   ├── LightTheme.xaml
+│   └── DarkTheme.xaml
+├── Assets/
+│   └── akk.ico
+├── installer/
+│   └── AkkDictionary.iss         # Inno Setup script
+├── AkkDictionary.Android/        # Android (Xamarin.Android) project
+└── dictionary.db                 # Bundled SQLite dictionary database
 ```
 
 ---
 
-## 💻 System Requirements
+## Contributing
 
-| Requirement | Minimum | Recommended |
-|-------------|---------|-------------|
-| OS | Windows 10 x64 | Windows 10/11 x64 |
-| RAM | 256 MB | 512 MB+ |
-| Disk Space | 200 MB | 300 MB |
-| Internet | Not required | Not required |
-| Dependencies | None | None |
+1. Fork the repo
+2. Create a feature branch: `git checkout -b feature/my-feature`
+3. Commit your changes
+4. Open a Pull Request
 
----
-
-## 🔧 Development
-
-### Prerequisites
-- .NET 8 SDK or higher
-- Visual Studio 2022 (recommended)
-- Git
-
-### Project Structure
-```
-AkkDictionaryApp/
-├── MainWindow.xaml(.cs)       # Main application UI
-├── SettingsWindow.xaml(.cs)   # Settings dialog
-├── SqliteImportWindow.xaml(.cs) # SQLite import dialog
-├── Utils.cs                    # Utility functions
-├── App.xaml(.cs)              # Application entry point
-├── dictionary.db              # SQLite database
-└── Assets/                    # Application icons
-```
-
-### Building
-
-**Debug Build**
-```bash
-dotnet build
-```
-
-**Release Build (Optimized)**
-```bash
-dotnet build -c Release
-```
-
-**Self-Contained Executable**
-```bash
-dotnet publish -c Release -r win-x64 --self-contained
-```
-
-### Running Tests
-```bash
-dotnet test
-```
+Please make sure the project builds without errors before submitting.
 
 ---
 
-## 📥 Importing Dictionaries
+## License
 
-### From Excel
-1. Prepare Excel file with columns: `Word`, `state` (POS), `def` (definition)
-2. Menu → File → Rebuild database from Excel
-3. Select your file
-4. Wait for import to complete
-
-### From SQLite
-1. Menu → File → Import from SQLite
-2. Select source database
-3. Enter table and column names
-4. Click Import
-
----
-
-## ⚙️ Configuration
-
-### Settings
-Access via: Menu → Settings
-
-- **Enable Suggestions** - Auto-complete while typing
-- **Default to Reverse Search** - Switch search direction by default
-- **UI Font Family** - Customize displayed font
-- **Font Scale** - Adjust text size (0.9x to 1.4x)
-- **Remember Window** - Save window position
-
-All settings are automatically saved.
-
----
-
-## 🐛 Troubleshooting
-
-### Application won't start
-- Ensure Windows 10 or later
-- Try running from different location
-- Check folder permissions
-
-### No search results
-- Verify `dictionary.db` exists
-- Try rebuilding database from Excel
-- Check database file isn't corrupted
-
-### Import fails
-- Verify file format (Excel or SQLite)
-- Check column names match exactly
-- Ensure file isn't open in another application
-
-For more help, see [QUICK_START.md](QUICK_START.md#troubleshooting).
-
----
-
-## 📝 License
-
-This project is licensed under the **MIT License** - see the [LICENSE.txt](LICENSE.txt) file for details.
-
-```
-MIT License
-
-Copyright (c) 2024 AKK Dictionary Team
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-...
-```
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! To contribute:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-Please ensure:
-- Code compiles without errors or warnings
-- All features are tested
-- Documentation is updated
-
----
-
-## 📞 Support & Contact
-
-- **GitHub Issues**: [Report bugs or request features](https://github.com/aungkokomm/AkkDictionaryApp/issues)
-- **Documentation**: See [START_HERE.md](START_HERE.md)
-- **User Guide**: See [QUICK_START.md](QUICK_START.md)
-- **Developer Guide**: See [BUILD_AND_DISTRIBUTION.md](BUILD_AND_DISTRIBUTION.md)
-
----
-
-## 🗺️ Roadmap
-
-### Version 1.1.0 (Current)
-General improvements and database updates that will be achieved at the third quarter of this year.
-
-## 📊 Project Statistics
-
-| Metric | Value |
-|--------|-------|
-| Language | C# 12 |
-| Framework | .NET 8 |
-| UI Technology | WPF |
-| Database | SQLite3 |
-| Executable Size | ~172 MB |
-| Code Size | ~500+ lines |
-| Status | Production Ready |
-
----
-
-## 🎯 Version History
-
-### v1.0.0 (March 2026)
-- Initial release
-- Full dictionary search capabilities
-- Import from Excel and SQLite
-- Customizable UI
-- Professional WPF interface
-- Complete documentation
-
----
-### v1.1.0 (April 2026)
-* **Smart Fuzzy Search:** The search engine computes edit distances to suggest the closest matches if your query returns zero results.
-* **Instant Dark Mode:** Toggle between Light and Dark themes with zero flickering.
-* **Native Text-to-Speech:** Listen to accurate pronunciations instantly using the built-in Windows speech engine (no internet required).
-* **Customizable Layout:** Adjust the resizable split pane; your preferred window dimensions and pane width are remembered between sessions.
-* **Interactive Definitions:** Click on "See also" cross-references to jump directly to related vocabulary.
-* **Bookmarks & Export:** Star entries to save them, or copy the headword, part-of-speech, and all numbered definitions to your clipboard with a single click.
-* **Optimized Search:** Typing rapidly only queries the database once after a 300ms pause.
-
-
-## 🙏 Acknowledgments
-
-- Built with .NET 8 and WPF
-- Database powered by SQLite
-- Excel support via ExcelDataReader
-- Community feedback and contributions
-
----
-
-## 📄 Additional Resources
-
-- [.NET 8 Documentation](https://learn.microsoft.com/en-us/dotnet/core/)
-- [WPF Guide](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/)
-- [SQLite Documentation](https://www.sqlite.org/docs.html)
-- [GitHub Guides](https://guides.github.com/)
-
----
-
-## 💡 Tips for Users
-
-1. **Faster Searching**: Use prefix matching (type first letters)
-2. **Explore Links**: Click words in definitions to learn more
-3. **Customize Look**: Adjust fonts in Settings for comfortable reading
-4. **Import Data**: Keep your dictionary updated with new words
-5. **Offline Use**: All data is local - works without internet
-
----
-
-## ⭐ If You Find This Useful
-
-Please consider:
-- ⭐ Starring the repository
-- 🐛 Reporting bugs
-- 💡 Suggesting features
-- 📢 Sharing with others
-- 🤝 Contributing improvements
-
----
-
-**Status**: ✅ Production Ready  
-**Last Updated**: April 2026  
-**License**: MIT
-
----
-
-*For quick start, see [QUICK_START.md](QUICK_START.md) or [START_HERE.md](START_HERE.md)*
+[MIT License](LICENSE.txt) — © Aung Ko Ko
